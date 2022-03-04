@@ -1,9 +1,12 @@
 import express from 'express'
-import routeExample from './example.routes'
+
+import routeTask from '../api/tasks/routes'
+import routeUser from '../api/users/routes'
 
 const app = express()
 
-app.use('/example', routeExample)
-
+// api/
+app.use('/task', routeTask)
+app.use('/user', routeUser)
 
 export default app
