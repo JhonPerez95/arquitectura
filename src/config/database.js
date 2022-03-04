@@ -1,20 +1,29 @@
-import mongoose from 'mongoose'
+import { Sequelize } from 'sequelize'
 import config from './index'
 
-const { urlCnn } = config.db
+const { db: configDb } = config
 
-const connectDb = async () => {
+const db = new Sequelize(configDb.database, configDb.user, configDb.pass, {
+  host: configDb.host,
+  port: '3306',
+  dialect: 'mysql',
+  dialectOptions: {
+    dateStrings: true,
+    typeCast: true,
+    timezone: 'local',
+  },
+  timezone: 'America/Bogota',
+})
+
+export async function dbConnected(db) {
   try {
-    await mongoose.connect(urlCnn, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      // useCreateIndex: true,
-      // useFindAndModify: false,
-    })
-    console.log('Base de datos conectada')
-  } catch ({ message: error }) {
-    console.log(`No se connecto a la base de datos  ${error}`)
+    await db.authenticate()
+    console.log('Connection has been established successfully.')
+  } catch (error) {
+    console.error('Unable to connect to the database:', error)
   }
 }
 
-export default connectDb
+dbConnected(db)
+
+export default db

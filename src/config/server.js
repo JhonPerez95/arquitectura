@@ -18,6 +18,6 @@ app.use(express.urlencoded({ extended: false }))
 app.use('/api', routesAPI)
 
 // Database
-
+require('./database')
 
 export default app
