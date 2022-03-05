@@ -44,9 +44,9 @@ const findById = async (req = request, res = response) => {
  * @param {Response} res
  */
 const created = async (req = request, res = response) => {
-  const { description, state } = req.body
+  const { title, description, state } = req.body
   try {
-    const task = await modelTask.create({ description, state })
+    const task = await modelTask.create({ title, description, state })
     if (!task)
       return res
         .status(404)

@@ -8,6 +8,10 @@ const Task = Db.define('task', {
     primaryKey: true,
     allowNull: false,
   },
+  title: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
   description: {
     type: DataTypes.STRING,
     allowNull: false,
