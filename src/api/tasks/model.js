@@ -13,8 +13,8 @@ const createdTask = async (task) => {
   return DAO.createdTask(task)
 }
 
-const updatedTask = async (id, { description, state }) => {
-  return DAO.updatedTask(id , { description, state })
+const updatedTask = async (id, { title ,description, state }) => {
+  return DAO.updatedTask(id , { title,  description, state })
 }
 
 const deleteTask = async ({ id }) => {
