@@ -1,3 +1,4 @@
+// DATA ACCESS OBJECT
 import Task from './models'
 
 /**
@@ -9,6 +10,23 @@ const findAllTasks = () => {
     try {
       const tasks = await Task.findAll()
       return resolve(tasks)
+    } catch (error) {
+      return reject(error)
+    }
+  })
+}
+
+
+/**
+ * Funcion que guarda una tarea en la DB
+ * @param {Objet} task con atributos para guardar
+ * @returns una tarea
+ */
+ const createdTask = (task) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const taskSaved = await Task.create(task)
+      return resolve(taskSaved)
     } catch (error) {
       return reject(error)
     }
@@ -31,21 +49,6 @@ const findTaskById = (id) => {
   })
 }
 
-/**
- * Funcion que guarda una tarea en la DB
- * @param {Objet} task con atributos para guardar
- * @returns una tarea
- */
-const createdTask = (task) => {
-  return new Promise(async (resolve, reject) => {
-    try {
-      const taskSaved = await Task.create(task)
-      return resolve(taskSaved)
-    } catch (error) {
-      return reject(error)
-    }
-  })
-}
 
 /**
  * Funcion que actualiza una tarea en la DB

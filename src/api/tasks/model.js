@@ -1,3 +1,4 @@
+
 import DAO from '../../services/database/sequelize/tasks/DataAccessObject'
 
 const getTasks = async () => {

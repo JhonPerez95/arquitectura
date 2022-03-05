@@ -8,6 +8,10 @@ const Task = Db.define('task', {
     primaryKey: true,
     allowNull: false,
   },
+  title: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
   description: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -22,5 +26,4 @@ Task.sync()
   .then(() => console.log('Sync Successfull Task!'))
   .catch((err) => console.log(err))
 
-
-  export default Task
+export default Task

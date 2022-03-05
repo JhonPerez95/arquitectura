@@ -1,3 +1,4 @@
+// CONTROLADOR
 import { request, response } from 'express'
 import modelTask from './model'
 /**
@@ -16,6 +17,29 @@ const findAll = async (req = request, res = response) => {
 }
 
 /**
+ * [POST]
+ * @param {Reques} req
+ * @param {Response} res
+ */
+const created = async (req = request, res = response) => {
+  const { title, description, state } = req.body
+  try {
+    const task = await modelTask.createdTask({ title, description, state })
+    if (!task)
+      return res
+        .status(404)
+        .json({ ok: false, message: 'No se pudo crear la tarea !' })
+
+    res.status(200).json({ ok: true, task })
+  } catch (error) {
+    console.log(error)
+    res
+      .status(500)
+      .json({ ok: false, message: 'Error comunicarse con el Admin !' })
+  }
+}
+
+/**
  * [GET]:id
  * @param {Reques} req
  * @param {Response} res
@@ -28,29 +52,6 @@ const findById = async (req = request, res = response) => {
       return res
         .status(404)
         .json({ ok: false, message: 'No se encontro ninguna tarea!' })
-
-    res.status(200).json({ ok: true, task })
-  } catch (error) {
-    console.log(error)
-    res
-      .status(500)
-      .json({ ok: false, message: 'Error comunicarse con el Admin !' })
-  }
-}
-
-/**
- * [POST]
- * @param {Reques} req
- * @param {Response} res
- */
-const created = async (req = request, res = response) => {
-  const { description, state } = req.body
-  try {
-    const task = await modelTask.createdTask({ description, state })
-    if (!task)
-      return res
-        .status(404)
-        .json({ ok: false, message: 'No se pudo crear la tarea !' })
 
     res.status(200).json({ ok: true, task })
   } catch (error) {
