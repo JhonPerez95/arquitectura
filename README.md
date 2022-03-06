@@ -1,2 +1,5 @@
 # api-rest
-Formato de api rest con, node , expresjs
+
+npm i 
+
+npm run dev
